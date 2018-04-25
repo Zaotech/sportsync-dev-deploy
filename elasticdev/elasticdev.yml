@@ -1,55 +1,55 @@
 global_arguments:
-    EnvVars:
-        METEOR_SETTINGS: '{{ METEOR_SETTINGS }}'
-        APP_BUNDLE_DIR: /opt/meteor/dist/bundle
-    region: ap-southeast-1
-    db_type: mongodb
-    sg_db_label: database
-    sg_web_label: web
+   EnvVars:
+      METEOR_SETTINGS: '{{ METEOR_SETTINGS }}'
+      APP_BUNDLE_DIR: /opt/meteor/dist/bundle
+   region: ap-southeast-1
+   db_type: mongodb
+   sg_db_label: database
+   sg_web_label: web
 infrastructure:
-    vpc:
-        stack_name: aws_vpc_2tier
-    db:
-        stack_name: aws_ec2_mongodb
-        arguments:
-            dbs: 1
-            size: t2.micro
-    dockerhost:
-        stack_name: aws_ec2_dockerhost_dev
-        arguments:
-            size: t2.medium
-            disksize: 50
+   vpc:
+       stack_name: aws_vpc_2tier
+   db:
+       stack_name: aws_ec2_mongodb
+       arguments:
+          dbs: 1
+          size: t2.micro
+   dockerhost:
+       stack_name: aws_ec2_dockerhost_dev
+       arguments:
+          size: t2.medium
+          disksize: 50
 build:
-    sportsync_web_dev:
-         stack_name: build_dev
-         repo_url: https://github.com/Zaotech/sportsync-web
-         repo_branch: meteor-1.6
-         triggered_branches:
-            - meteor-1.6
-         arguments:
-            DOCKER_FILE_BUILD: configs/build/Dockerfile
-            DockerProvider: docker.io
-            DockerUsername: justinling
-            DockerRepoType: private
-            DockerRepoName: sportsync
-         results:
-            - name: sportsync_web_dev_build
-         rename:
-            EnvVars:
-                DockerImage: DOCKER_IMAGE_SPORTSYNC_WEB_DEV
-    triggers:
-        - name: sportsync_web_dev
-            type: trigger
-            path: deploy::sportsync_web_dev_deploy
-            channels:
-                - sportsync_web_dev_build
+   sportsync_web_dev:
+       stack_name: build_dev
+       repo_url: https://github.com/Zaotech/sportsync-web
+       repo_branch: meteor-1.6
+       triggered_branches:
+                 - meteor-1.6
+       arguments:
+          DOCKER_FILE_BUILD: configs/build/Dockerfile
+          DockerProvider: docker.io
+          DockerUsername: justinling
+          DockerRepoType: private
+          DockerRepoName: sportsync
+       results:
+           - name: sportsync_web_dev_build
+       rename:
+          EnvVars:
+             DockerImage: DOCKER_IMAGE_SPORTSYNC_WEB_DEV
+   triggers:
+       - name: sportsync_web_dev
+         type: trigger
+         path: deploy::sportsync_web_dev_deploy
+         channels:
+             - sportsync_web_dev_build
 deploy:
-     sportsync_web_dev_deploy:
-         stack_name: deploy_dev
-         arguments:
-            EnvVars:
-                APP_BUNDLE_DIR: /opt/meteor/dist/bundle
-                ROOT_URL: https://dev.sportsync.com
-            DOCKER_TEMPLATE_FILES:
-                - template_file: configs/deploy/Dockerfile.ja2
-                - template_file: configs/deploy/docker-compose.yml.ja2
+    sportsync_web_dev_deploy:
+       stack_name: deploy_dev
+       arguments:
+           EnvVars:
+               APP_BUNDLE_DIR: /opt/meteor/dist/bundle
+               ROOT_URL: https://dev.sportsync.com
+           DOCKER_TEMPLATE_FILES:
+                 - template_file: configs/deploy/Dockerfile.ja2
+                 - template_file: configs/deploy/docker-compose.yml.ja2
