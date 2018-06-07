@@ -1,0 +1,8 @@
+guest:
+  restart: always
+  build: ./
+  ports:
+    - ":80"
+  env_file:
+    - .env
+  command: passenger start --app-type node --startup-file main.js --port 80

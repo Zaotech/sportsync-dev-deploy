@@ -1,0 +1,26 @@
+# Deploy Manifest ID: TI5G5FNUV1URLM3DX3IWC4E1TAGLXU
+# Automated Deploy by ED through GitOps
+
+################################
+# Repo/Commit Info
+################################
+
+**** https://github.com/Zaotech/sportsync-web ****
+commit_url: https://github.com/Zaotech/sportsync-web/commit/698cc62eaca14c85c78ab0aba49a78165d8d4f1c
+commit_hash: 698cc62eaca14c85c78ab0aba49a78165d8d4f1c
+message: updated to meteor 1.6 and removed babel-preset-es2015
+
+author: Lau Yi
+committer: Lau Yi
+authored_date: 2018-03-23 10:35:10
+committed_date: 2018-03-23 10:35:10
+
+################################
+# Environment Variables from build
+################################
+
+DOCKER_FILE: elasticdev/configs/build/Dockerfile
+SSH_PORT: 22001
+DOCKER_IMAGE_NAME: LJKDNFXPBWPCSYHI
+DOCKER_IMAGE_TAG: LJKDNFXPBWPCSYHI
+DOCKER_IMAGE: docker.io/justinling/sportsync:LJKDNFXPBWPCSYHI
