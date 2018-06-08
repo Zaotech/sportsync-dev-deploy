@@ -28,15 +28,15 @@ build:
                  - meteor-1.6
        arguments:
           DOCKER_FILE_BUILD: configs/build/Dockerfile
-          DockerProvider: docker.io
-          DockerUsername: justinling
-          DockerRepoType: private
-          DockerRepoName: sportsync
+          DOCKER_PROVIDER: docker.io
+          DOCKER_USERNAME: justinling
+          DOCKER_REPO_TYPE: private
+          DOCKER_REPO_NAME: sportsync
        results:
            - name: sportsync_web_dev_build
        rename:
           EnvVars:
-             DockerImage: DOCKER_IMAGE_SPORTSYNC_WEB_DEV
+             DOCKER_IMAGE: DOCKER_IMAGE_SPORTSYNC_WEB_DEV
    triggers:
        - name: sportsync_web_dev
          type: trigger
