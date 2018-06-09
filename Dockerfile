@@ -1,3 +1,3 @@
-FROM docker.io/justinling/sportsync:PYWWEPGAIYWBSBXY
+FROM docker.io/justinling/sportsync:WWKKBFGRSIQARUCL
 EXPOSE 80
 WORKDIR $APP_BUNDLE_DIR/bundle
