@@ -1,4 +1,4 @@
-# template_control_repo
+# Sportsync Dev Control Repo
 
 Overview:
 
